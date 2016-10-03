@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Meus Itens">
+        <menu>
+            <item android:icon="@drawable/ic_menu_camera" android:id="@+id/nav_camera" android:title="Itens Perdidos" />
+            <item android:icon="@drawable/ic_menu_gallery" android:id="@+id/nav_gallery" android:title="Itens Encontrados" />
+            <item android:icon="@drawable/ic_menu_slideshow" android:id="@+id/nav_slideshow" android:title="Itens Devolvidos" />
+        </menu>
+    </item>
+    <item android:title="Comunicação">
+        <menu>
+            <item android:icon="@drawable/ic_comment" android:id="@+id/nav_share" android:title="Conversas" />
+        </menu>
+    </item>
+</menu>

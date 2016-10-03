@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8.0dip">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16.0dip">
+
+            <TextView
+                android:id="@+id/lbl_titulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="25.0dip"
+                android:text="Celular Moto G3"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="25.0dip"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/lbl_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25.0dip"
+                android:layout_marginLeft="25.0dip"
+                android:layout_marginRight="25.0dip"
+                android:text="00:00 01/01/1970"
+                android:textColor="@color/colorTextListItem"
+                android:textSize="15.0dip" />
+
+            <TextView
+                android:id="@+id/lbl_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25.0dip"
+                android:layout_marginRight="25.0dip"
+                android:text="Descrição: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec purus neque, adipiscing malesuada lectus non, ullamcorper gravida augue."
+                android:textColor="@color/colorTextListItem"
+                android:textSize="15.0dip" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1.0dip"
+                android:layout_margin="25.0dip"
+                android:background="@color/colorTextListItem" />
+
+            <TextView
+                android:id="@+id/lbl_foto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25.0dip"
+                android:layout_marginLeft="25.0dip"
+                android:layout_marginRight="25.0dip"
+                android:text="Fotos:"
+                android:textColor="@color/colorTextListItem"
+                android:textSize="15.0dip" />
+
+            <Gallery
+                android:id="@+id/gallery1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</android.support.design.widget.CoordinatorLayout>

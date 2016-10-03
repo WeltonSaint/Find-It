@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Find-It</string>
+    <string name="navigation_drawer_open">Abrir menu lateral</string>
+    <string name="navigation_drawer_close">Fechar menu lateral</string>
+    <string name="action_settings">Configurações</string>
+    <string name="title_activity_login">Entrar</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Senha</string>
+    <string name="action_sign_in">Conectar</string>
+    <string name="action_sign_in_short">Conectar</string>
+    <string name="action_sign_up">Cadastrar</string>
+    <string name="prompt_repeat_password">Repita a Senha</string>
+    <string name="prompt_name">Nome</string>
+    <string name="error_invalid_email">Email inválido</string>
+    <string name="error_invalid_password">Esta senha é muito curta</string>
+    <string name="error_incorrect_password">Senha Incoreta</string>
+    <string name="error_field_required">Campo Obrigatório</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string-array name="categories">
+        <item>Encontrado</item>
+        <item>Perdido</item>
+    </string-array>
+    <string name="prompt_description">Descrição do Item</string>
+    <string name="prompt_position">Localização do Item</string>
+    <string name="help_logo">Logotipo da Aplicação</string>
+    <string name="title_activity_insert">Inserir</string>
+    <string name="title_activity_sign_up">Cadastrar Usuário</string>
+    <string name="itens_perdidos_encontrados">Itens Perdidos/Encontrados :</string>
+</resources>

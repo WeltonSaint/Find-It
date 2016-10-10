@@ -22,9 +22,9 @@ public class ImageAdapter extends BaseAdapter {
     public ImageAdapter(Context c)
     {
         context = c;
-        TypedArray a = c.obtainStyledAttributes(R.styleable.MyGallery);
+        /*TypedArray a = c.obtainStyledAttributes(R.styleable.MyGallery);
         itemBackground = a.getResourceId(R.styleable.MyGallery_android_galleryItemBackground, 0);
-        a.recycle();
+        a.recycle();*/
     }
     // returns the number of images
     public int getCount() {

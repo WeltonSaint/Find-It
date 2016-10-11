@@ -19,7 +19,6 @@ import android.os.Build.VERSION;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -31,6 +30,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
-
+    public AeSimpleSHA1 SHA1 = new AeSimpleSHA1();
     /**
      * A dummy authentication store containing known user names and passwords.
      * TODO: remove after connecting to a real authentication system.
@@ -163,6 +163,27 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 populateAutoComplete();
             }
         }
+    }
+
+
+    public void validarDados(View view){
+        String login;
+        String senha;
+
+        AutoCompleteTextView mText = (AutoCompleteTextView)findViewById(R.id.email);
+        EditText pText = (EditText)findViewById(R.id.password);
+
+        login = mText.getText().toString();
+        senha = pText.getText().toString();
+
+        try{
+            senha = SHA1.SHA1(senha);
+        }catch(Exception e){
+            //send error notification
+        }
+
+        //sent request to bd;
+        //Toast.makeText(this, senha, Toast.LENGTH_SHORT).show();
     }
 
 

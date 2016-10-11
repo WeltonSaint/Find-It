@@ -13,9 +13,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.Gallery;
+import android.widget.ImageView;
+import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    Integer[] imageIDs = {
+            R.drawable.foto0,
+            R.drawable.foto1,
+            R.drawable.foto2,
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,20 +34,29 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //ListView list = (ListView) findViewById(R.id.list);
+
+        // Note that Gallery view is deprecated in Android 4.1---
+        Gallery gallery = (Gallery) findViewById(R.id.gallery1);
+        gallery.setAdapter(new ImageAdapter(this));
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Intent intent = new Intent();
+
+                Intent intent = new Intent();
                 intent.setClass(MainActivity.this, InsertActivity.class);
                 startActivity(intent);
+
             }
         });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        //drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -76,7 +95,6 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -88,7 +106,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_slideshow) {
 
-        }  else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_share) {
 
         }
 

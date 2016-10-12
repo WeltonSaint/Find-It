@@ -31,6 +31,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
 
         @Override
         public void onBindViewHolder(GalleryAdapter.ViewHolder viewHolder, int i) {
+            viewHolder.img.setImageResource(context.getResources().getIdentifier("drawable/" + gallery.get(i), null, context.getPackageName()));
             //Picasso.with(context).load(gallery.get(i).getAndroid_image_url()).resize(240, 120).into(viewHolder.img);
         }
 
@@ -43,7 +44,6 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
             private ImageView img;
             public ViewHolder(View view) {
                 super(view);
-
                 img = (ImageView) view.findViewById(R.id.img);
             }
         }

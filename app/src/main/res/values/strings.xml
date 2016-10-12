@@ -34,4 +34,5 @@
     <string name="title_activity_insert">Inserir</string>
     <string name="title_activity_sign_up">Cadastrar Usuário</string>
     <string name="itens_perdidos_encontrados">Itens Perdidos/Encontrados :</string>
+    <string name="lbl_photos">Fotos:</string>
 </resources>

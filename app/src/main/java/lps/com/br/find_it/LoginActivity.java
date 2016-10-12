@@ -30,12 +30,13 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.mysql.jdbc.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -49,13 +50,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     private static final int REQUEST_READ_CONTACTS = 0;
     public AeSimpleSHA1 SHA1 = new AeSimpleSHA1();
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -237,20 +231,29 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+            try{
+
+                showProgress(true);
+                mAuthTask = new UserLoginTask(email.toUpperCase(), SHA1.SHA1(password));
+                mAuthTask.execute((Void) null);
+
+            }catch(Exception e){
+                //send error notification
+            }
         }
     }
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
-        return email.contains("@");
+        String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
+        java.util.regex.Matcher m = p.matcher(email);
+        return m.matches();
     }
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() > 8;
     }
 
     /**
@@ -374,40 +377,48 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     /**
-     * Represents an asynchronous login/registration task used to authenticate
+     * Represents an asynchronous login task used to authenticate
      * the user.
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String mEmail;
         private final String mPassword;
+        private String mUser;
 
         UserLoginTask(String email, String password) {
             mEmail = email;
             mPassword = password;
+            mUser = "";
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
 
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
+                boolean teste = false;
+                try
+                {
+                    System.out.println("login: " + mEmail + " <-> " + mPassword);
+                    ConnectionDB conDB = ConnectionDB.getInstance();
+                    PreparedStatement stmt = (PreparedStatement) conDB.getConnection().prepareStatement("select nomeCliente from findit.Cliente where ucase(emailCliente) = ? and senhaCliente = ?");
+                    stmt.setString(1, mEmail );
+                    stmt.setString(2, mPassword );
+
+                    ResultSet rs = stmt.executeQuery();
+
+                    if(rs.next())	{
+                        mUser = rs.getString("nomeCliente");
+                        teste = true;
+                    }
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    teste = false;
                 }
-            }
 
-            // TODO: register the new account here.
-            return true;
+                return teste;
+
         }
 
         @Override
@@ -417,6 +428,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             if (success) {
                 final Intent intent = new Intent();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("email", mEmail);
+                bundle.putSerializable("user", mUser);
+                intent.putExtras(bundle);
                 intent.setClass(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
 

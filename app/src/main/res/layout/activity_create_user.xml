@@ -11,8 +11,18 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
 
+    <ProgressBar
+        android:id="@+id/create_user_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="0.0dip"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8.0dip"
+        android:layout_weight="1.0"
+        android:visibility="gone" />
+
     <ScrollView
-        android:id="@+id/login_form"
+        android:id="@+id/create_user_form"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1.0"
@@ -27,17 +37,15 @@
             <android.support.v7.widget.CardView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10.0dip">
+                android:layout_marginBottom="5.0dip">
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="5.0dip"
                     android:paddingLeft="15.0dip"
-                    android:paddingRight="15.0dip"
-                    android:paddingTop="5.0dip">
+                    android:paddingRight="15.0dip">
 
-                    <AutoCompleteTextView
+                    <EditText
                         android:id="@+id/name"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -51,15 +59,13 @@
             <android.support.v7.widget.CardView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10.0dip">
+                android:layout_marginBottom="5.0dip">
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="5.0dip"
                     android:paddingLeft="15.0dip"
-                    android:paddingRight="15.0dip"
-                    android:paddingTop="5.0dip">
+                    android:paddingRight="15.0dip">
 
                     <AutoCompleteTextView
                         android:id="@+id/email_sign_up"
@@ -76,15 +82,39 @@
             <android.support.v7.widget.CardView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10.0dip">
+                android:layout_marginBottom="5.0dip">
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="5.0dip"
                     android:paddingLeft="15.0dip"
-                    android:paddingRight="15.0dip"
-                    android:paddingTop="5.0dip">
+                    android:paddingRight="15.0dip">
+
+                    <EditText
+                        android:id="@+id/user_contact"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_whatsapp_default"
+                        android:hint="@string/prompt_user_contact"
+                        android:imeActionId="@+id/login"
+                        android:imeActionLabel="@string/action_sign_in_short"
+                        android:imeOptions="normal|actionUnspecified"
+                        android:maxLines="1"
+                        tools:ignore="RtlHardcoded"
+                        android:inputType="phone" />
+                </android.support.design.widget.TextInputLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5.0dip">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15.0dip"
+                    android:paddingRight="15.0dip">
 
                     <EditText
                         android:id="@+id/password_sign_up"
@@ -104,15 +134,13 @@
             <android.support.v7.widget.CardView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10.0dip">
+                android:layout_marginBottom="5.0dip">
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="5.0dip"
                     android:paddingLeft="15.0dip"
-                    android:paddingRight="15.0dip"
-                    android:paddingTop="5.0dip">
+                    android:paddingRight="15.0dip">
 
                     <EditText
                         android:id="@+id/repeat_password_sign_up"
@@ -130,11 +158,11 @@
             </android.support.v7.widget.CardView>
 
             <Button
-                android:id="@+id/email_sign_in_button"
+                android:id="@+id/sign_up_button"
                 style="?android:textAppearanceSmall"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16.0dip"
+                android:layout_marginTop="10.0dip"
                 android:background="@drawable/button_default"
                 android:text="@string/action_sign_up"
                 android:textColor="@android:color/white"

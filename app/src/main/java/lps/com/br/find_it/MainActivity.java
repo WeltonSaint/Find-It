@@ -17,9 +17,16 @@ import android.widget.AdapterView;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private String mEmail;
+    private String mUser;
+
+    private TextView mNameUser;
+    private TextView mEmailUser;
 
     Integer[] imageIDs = {
             R.drawable.foto0,
@@ -33,6 +40,10 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Intent intent = getIntent();
+        mUser = (String) intent.getExtras().getSerializable("user");
+        mEmail = (String) intent.getExtras().getSerializable("email");
 
         //ListView list = (ListView) findViewById(R.id.list);
 
@@ -77,6 +88,13 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
+        mEmailUser = (TextView) findViewById(R.id.emailUser);
+        mNameUser = (TextView) findViewById(R.id.nameUser);
+
+        mEmailUser.setText(mEmail.toLowerCase());
+        mNameUser.setText(mUser);
+
         return true;
     }
 

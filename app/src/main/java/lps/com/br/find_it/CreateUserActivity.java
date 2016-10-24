@@ -110,7 +110,7 @@ public class CreateUserActivity extends AppCompatActivity {
 
         // Check for a valid user name, if the user entered one.
         if (!TextUtils.isEmpty(userName) && !isUserNameValid(userName)) {
-            mPasswordView.setError(getString(R.string.error_invalid_username));
+            mUserNameView.setError(getString(R.string.error_invalid_username));
             focusView = mUserNameView;
             cancel = true;
         }

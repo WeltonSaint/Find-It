@@ -4,124 +4,96 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="lps.com.br.find_it.InsertActivity"
     tools:showIn="@layout/activity_insert">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:ignore="UselessParent">
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="5.0dip"
-            android:paddingLeft="15.0dip"
-            android:paddingRight="15.0dip"
-            android:paddingTop="5.0dip">
-
-            <EditText
-                android:id="@+id/name"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/prompt_name"
-                android:imeActionId="@+id/login"
-                android:imeActionLabel="@string/action_sign_in_short"
-                android:imeOptions="normal|actionUnspecified"
-                android:maxLines="1" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="5.0dip"
-            android:paddingLeft="15.0dip"
-            android:paddingRight="15.0dip"
-            android:paddingTop="5.0dip">
-
-            <EditText
-                android:id="@+id/description"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/prompt_description"
-                android:imeActionId="@+id/login"
-                android:imeActionLabel="@string/action_sign_in_short"
-                android:imeOptions="normal|actionUnspecified"
-                android:maxLines="1" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="5.0dip"
-            android:paddingLeft="15.0dip"
-            android:paddingRight="15.0dip"
-            android:paddingTop="5.0dip">
-
-            <EditText
-                android:id="@+id/position"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/prompt_position"
-                android:imeActionId="@+id/login"
-                android:imeActionLabel="@string/action_sign_in_short"
-                android:imeOptions="normal|actionUnspecified"
-                android:maxLines="1" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="5.0dip"
-            android:paddingLeft="15.0dip"
-            android:paddingRight="15.0dip"
-            android:paddingTop="5.0dip">
-
-            <EditText
-                android:id="@+id/data"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/prompt_data"
-                android:imeActionId="@+id/login"
-                android:imeActionLabel="@string/action_sign_in_short"
-                android:imeOptions="normal|actionUnspecified"
-                android:maxLines="1"
-                android:inputType="date"/>
-        </android.support.design.widget.TextInputLayout>
-
-        <Spinner
-            android:id="@+id/spin_category"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="15.0dip"
-            android:paddingRight="15.0dip"
-            android:layout_marginTop="20.0dip"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
 
-        <Spinner
-            android:id="@+id/spin_situation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="15.0dip"
-            android:paddingRight="15.0dip"
-            android:layout_marginTop="20.0dip"/>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5.0dip"
+                android:paddingLeft="15.0dip"
+                android:paddingRight="15.0dip">
 
-        <Button
-            android:id="@+id/email_sign_in_button"
-            style="?android:textAppearanceSmall"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25.0dip"
-            android:background="@drawable/button_default"
-            android:text="@string/action_sign_up"
-            android:textColor="@android:color/white"
-            android:textStyle="bold" />
+                <EditText
+                    android:id="@+id/name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_name"
+                    android:imeActionId="@+id/login"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="normal|actionUnspecified"
+                    android:maxLines="1" />
+            </android.support.design.widget.TextInputLayout>
 
-    </LinearLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5.0dip"
+                android:paddingLeft="15.0dip"
+                android:paddingRight="15.0dip">
+
+                <EditText
+                    android:id="@+id/description"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_description"
+                    android:imeActionId="@+id/login"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="normal|actionUnspecified"
+                    android:maxLines="1" />
+            </android.support.design.widget.TextInputLayout>
+
+            <Spinner
+                android:id="@+id/spin_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10.0dip"
+                android:paddingLeft="15.0dip"
+                android:paddingRight="15.0dip" />
+
+            <Spinner
+                android:id="@+id/spin_situation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20.0dip"
+                android:paddingLeft="15.0dip"
+                android:paddingRight="15.0dip" />
+
+            <fragment
+                android:id="@+id/mapFragment"
+                class="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="200.0dip"
+                android:layout_marginTop="15.0dip" />
+
+            <Button
+                android:id="@+id/email_sign_in_button"
+                style="?android:textAppearanceSmall"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15.0dip"
+                android:background="@drawable/button_default"
+                android:text="@string/action_sign_up"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

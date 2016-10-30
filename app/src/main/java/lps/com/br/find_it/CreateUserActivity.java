@@ -52,7 +52,10 @@ public class CreateUserActivity extends AppCompatActivity {
         mEmailSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptSignUp();
+                if(KeepLogin.isConnected(CreateUserActivity.this))
+                    attemptSignUp();
+                else
+                    KeepLogin.showIsNotConected(CreateUserActivity.this);
             }
         });
 

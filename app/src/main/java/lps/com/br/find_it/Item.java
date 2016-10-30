@@ -2,8 +2,6 @@ package lps.com.br.find_it;
 
 import android.widget.ImageView;
 
-import java.util.Date;
-
 /**
  * Created by Hanna on 29/10/2016.
  */
@@ -13,10 +11,12 @@ public class Item {
     private String nomeItem;
     private ImageView foto;
     private String descricao;
-    private String local;
-    private Date data;
+    private double latitude;
+    private double longitude;
+    private double raio;
     private String categoria;
     private String status;
+    private int codigoUsuario;
 
     public String getNomeItem() {
         return nomeItem;
@@ -42,21 +42,17 @@ public class Item {
         this.descricao = descricao;
     }
 
-    public String getLocal() {
-        return local;
-    }
+    public double getLatitude() { return latitude;}
 
-    public void setLocal(String local) {
-        this.local = local;
-    }
+    public void setLatitude(double latitude) { this.latitude = latitude; }
 
-    public Date getData() {
-        return data;
-    }
+    public double getLongitude() { return longitude; }
 
-    public void setData(Date data) {
-        this.data = data;
-    }
+    public void setLongitude(double longitude) { this.longitude = longitude; }
+
+    public double getRaio() { return raio; }
+
+    public void setRaio(double raio) { this.raio = raio; }
 
     public String getCategoria() {
         return categoria;
@@ -74,22 +70,34 @@ public class Item {
         this.status = status;
     }
 
-    public Item(String nomeItem, ImageView foto, String descricao, String local, Date data, String categoria, String status){
+    public int getCodigoUsuario() {
+        return codigoUsuario;
+    }
+
+    public void setCodigoUsuario(int codigoUsuario) {
+        this.codigoUsuario = codigoUsuario;
+    }
+
+    public Item(String nomeItem, ImageView foto, String descricao, double latitude, double longitude, double raio, String categoria, String status, int codigoUsuario) {
         this.nomeItem = nomeItem;
         this.foto = foto;
         this.descricao = descricao;
-        this.local = local;
-        this.data = data;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.raio = raio;
         this.categoria = categoria;
         this.status = status;
+        this.codigoUsuario = codigoUsuario;
     }
 
-    public Item(String nomeItem, String descricao, String local, Date data, String categoria, String status){
+    public Item(String nomeItem, String descricao, double latitude, double longitude, double raio, String categoria, String status, int codigoUsuario) {
         this.nomeItem = nomeItem;
         this.descricao = descricao;
-        this.local = local;
-        this.data = data;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.raio = raio;
         this.categoria = categoria;
         this.status = status;
+        this.codigoUsuario = codigoUsuario;
     }
 }

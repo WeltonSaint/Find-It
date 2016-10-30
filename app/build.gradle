@@ -42,4 +42,5 @@ dependencies {
     compile 'com.android.support:cardview-v7:24.1.1'
     compile 'com.android.support:appcompat-v7:24.1.1'
     compile files('mysql-connector-java-5.1.38-bin.jar')
+    compile 'com.google.android.gms:play-services-maps:9.6.1'
 }

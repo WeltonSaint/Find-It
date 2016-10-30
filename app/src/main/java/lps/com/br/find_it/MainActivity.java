@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity
 
     private String mEmail;
     private String mUser;
+    private int mUserCode;
 
     private TextView mNameUser;
     private TextView mEmailUser;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity
         Intent intent = getIntent();
         mUser = (String) intent.getExtras().getSerializable("user");
         mEmail = (String) intent.getExtras().getSerializable("email");
+        mUserCode = intent.getIntExtra("code", 0);
 
         //ListView list = (ListView) findViewById(R.id.list);
 
@@ -104,6 +106,7 @@ public class MainActivity extends AppCompatActivity
 
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, InsertActivity.class);
+                intent.putExtra("code", mUserCode);
                 startActivity(intent);
 
             }

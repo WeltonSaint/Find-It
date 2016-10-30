@@ -90,7 +90,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+                if(KeepLogin.isConnected(LoginActivity.this))
+                    attemptLogin();
+                else
+                    KeepLogin.showIsNotConected(LoginActivity.this);
             }
         });
 
@@ -385,6 +388,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         private final String mEmail;
         private final String mPassword;
         private String mUser;
+        private int mUserCode;
 
         UserLoginTask(String email, String password) {
             mEmail = email;
@@ -401,7 +405,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 {
                     System.out.println("login: " + mEmail + " <-> " + mPassword);
                     ConnectionDB conDB = ConnectionDB.getInstance();
-                    PreparedStatement stmt = (PreparedStatement) conDB.getConnection().prepareStatement("select nomeCliente from findit.Cliente where ucase(emailCliente) = ? and senhaCliente = ?");
+                    PreparedStatement stmt = (PreparedStatement) conDB.getConnection().prepareStatement("select codigoCliente, nomeCliente from findit.Cliente where ucase(emailCliente) = ? and senhaCliente = ?");
                     stmt.setString(1, mEmail );
                     stmt.setString(2, mPassword );
 
@@ -409,6 +413,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                     if(rs.next())	{
                         mUser = rs.getString("nomeCliente");
+                        mUserCode = rs.getInt("codigoCliente");
                         teste = true;
                     }
 
@@ -431,6 +436,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("email", mEmail);
                 bundle.putSerializable("user", mUser);
+                intent.putExtra("code", mUserCode);
                 intent.putExtras(bundle);
                 intent.setClass(LoginActivity.this, MainActivity.class);
                 startActivity(intent);

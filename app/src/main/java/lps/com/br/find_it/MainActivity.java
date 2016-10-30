@@ -1,5 +1,6 @@
 package lps.com.br.find_it;
 
+import android.app.Notification;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity
         //ListView list = (ListView) findViewById(R.id.list);
 
         // Note that Gallery view is deprecated in Android 4.1---
+
 
         RecyclerView recyclerView = (RecyclerView)findViewById(R.id.card_recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -121,6 +123,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
 
     @Override

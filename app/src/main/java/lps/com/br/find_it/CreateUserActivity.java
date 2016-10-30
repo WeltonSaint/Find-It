@@ -3,10 +3,17 @@ package lps.com.br.find_it;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -15,6 +22,7 @@ import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.mysql.jdbc.PreparedStatement;
 
@@ -61,6 +69,7 @@ public class CreateUserActivity extends AppCompatActivity {
 
         mCreateUserFormView = findViewById(R.id.create_user_form);
         mProgressView = findViewById(R.id.create_user_progress);
+        new MyNotificationManager(this, "Titulo", "Meu texto aqui");
     }
 
     /**
@@ -281,10 +290,13 @@ public class CreateUserActivity extends AppCompatActivity {
             dlg.show();
         }
 
+
+
         @Override
         protected void onCancelled() {
             mAuthTask = null;
             showProgress(false);
         }
     }
+
 }

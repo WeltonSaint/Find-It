@@ -284,8 +284,4 @@ public class CreateUserActivity extends AppCompatActivity {
             showProgress(false);
         }
     }
-
 }
-
-
-

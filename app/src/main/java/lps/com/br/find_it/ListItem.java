@@ -3,13 +3,10 @@ package lps.com.br.find_it;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.Context;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -33,13 +30,6 @@ public class ListItem extends Fragment {
     private static final String ARG_PARAM1 = "option";
     private static final String ARG_PARAM2 = "userCode";
 
-    private enum LayoutManagerType {
-        GRID_LAYOUT_MANAGER,
-        LINEAR_LAYOUT_MANAGER
-    }
-
-    protected LayoutManagerType mCurrentLayoutManagerType;
-
     // TODO: Rename and change types of parameters
     private int mUserCode;
     private int mOption;
@@ -48,11 +38,10 @@ public class ListItem extends Fragment {
     private ListItemTask mAuthTask = null;
     private ArrayList<Item> listItem;
 
-
-    private RecyclerView.LayoutManager mLayoutManager;
     private TextView lblItemDescription;
     private ProgressBar mListItemProgress;
     private RelativeLayout mListItemView;
+    private TextView lblNotResults;
     private RecyclerView mListItems;
 
     public ListItem() {
@@ -101,6 +90,7 @@ public class ListItem extends Fragment {
         // "view" is the one returned from onCreateView
         listItemDescriptions = getResources().getStringArray(R.array.list_item_descriptions);
         lblItemDescription = (TextView) view.findViewById(R.id.lbl_list_item_desc);
+        lblNotResults = (TextView) view.findViewById(R.id.lbl_not_results);
         mListItemProgress = (ProgressBar) view.findViewById(R.id.list_item_progress);
         mListItemView = (RelativeLayout) view.findViewById(R.id.list_item_view);
         mListItems = (RecyclerView) view.findViewById(R.id.list_item);
@@ -112,6 +102,10 @@ public class ListItem extends Fragment {
             showProgress(true);
             mAuthTask = new ListItemTask(mOption, mUserCode);
             listItem = mAuthTask.execute((Void) null).get();
+            if(listItem.size() == 0)
+                lblNotResults.setVisibility(View.VISIBLE);
+            else
+                lblNotResults.setVisibility(View.GONE);
             ListItemAdapter adapter = new ListItemAdapter(getActivity(), listItem);
             mListItems.setAdapter(adapter);
         } catch (InterruptedException e) {

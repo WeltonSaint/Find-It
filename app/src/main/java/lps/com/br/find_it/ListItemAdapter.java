@@ -24,17 +24,19 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.ViewHo
 
     @Override
     public ListItemAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item, viewGroup, false);
-        return new ViewHolder(view);
+        View rootView = LayoutInflater.from(context).inflate(R.layout.list_item, null, false);
+        RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        rootView.setLayoutParams(lp);
+        return new ViewHolder(rootView);
     }
 
     @Override
     public void onBindViewHolder(ListItemAdapter.ViewHolder viewHolder, int i) {
         viewHolder.lbNome.setText(items.get(i).getNomeItem());
         viewHolder.lblData.setText(items.get(i).getData());
-        viewHolder.lblCategoria.setText("Categoria: "+ items.get(i).getCategoria());
-        viewHolder.lblStatus.setText("Status: " + items.get(i).getStatus());
-        viewHolder.lblDescricao.setText("Descrição: " + items.get(i).getDescricao());
+        viewHolder.lblCategoria.setText(viewHolder.lblCategoria.getText() + items.get(i).getCategoria());
+        viewHolder.lblStatus.setText(viewHolder.lblStatus.getText() + items.get(i).getStatus());
+        viewHolder.lblDescricao.setText(viewHolder.lblDescricao.getText() + items.get(i).getDescricao());
     }
 
     @Override

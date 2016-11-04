@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.app.TaskStackBuilder;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarActivity;
 
 /**
@@ -26,6 +27,7 @@ public class MyNotificationManager{
             NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(context)
                             .setSmallIcon(R.drawable.ic_stat_logo)
+                            .setColor(ContextCompat.getColor(context,R.color.colorPrimary))
                             .setContentTitle(title)
                             .setContentText(text);
 // Creates an explicit intent for an Activity in your app

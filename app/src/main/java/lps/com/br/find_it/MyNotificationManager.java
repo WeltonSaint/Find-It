@@ -25,7 +25,7 @@ public class MyNotificationManager{
 
             NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(context)
-                            .setSmallIcon(R.drawable.ic_social_person)
+                            .setSmallIcon(R.drawable.ic_stat_logo)
                             .setContentTitle(title)
                             .setContentText(text);
 // Creates an explicit intent for an Activity in your app

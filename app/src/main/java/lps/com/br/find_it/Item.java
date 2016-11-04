@@ -14,6 +14,7 @@ public class Item {
     private double latitude;
     private double longitude;
     private double raio;
+    private String data;
     private String categoria;
     private String status;
     private int codigoUsuario;
@@ -53,6 +54,10 @@ public class Item {
     public double getRaio() { return raio; }
 
     public void setRaio(double raio) { this.raio = raio; }
+
+    public String getData() { return data;  }
+
+    public void setData(String data) { this.data = data; }
 
     public String getCategoria() {
         return categoria;

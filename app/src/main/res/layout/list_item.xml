@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -36,6 +37,28 @@
                 android:textSize="15.0dip" />
 
             <TextView
+                android:id="@+id/lbl_categoria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15.0dip"
+                android:layout_marginLeft="25.0dip"
+                android:layout_marginRight="25.0dip"
+                android:text="Categoria: Outros"
+                android:textColor="@color/colorTextListItem"
+                android:textSize="15.0dip" />
+
+            <TextView
+                android:id="@+id/lbl_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15.0dip"
+                android:layout_marginLeft="25.0dip"
+                android:layout_marginRight="25.0dip"
+                android:text="Status: Encontrado"
+                android:textColor="@color/colorTextListItem"
+                android:textSize="15.0dip" />
+
+            <TextView
                 android:id="@+id/lbl_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -48,26 +71,28 @@
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1.0dip"
-                android:layout_margin="25.0dip"
+                android:layout_marginTop="25.0dip"
+                android:layout_marginLeft="25.0dip"
+                android:layout_marginRight="25.0dip"
+                android:layout_marginBottom="5dp"
                 android:background="@color/colorTextListItem" />
+
+
 
             <TextView
                 android:id="@+id/lbl_foto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="25.0dip"
-                android:layout_marginLeft="25.0dip"
-                android:layout_marginRight="25.0dip"
+                android:layout_margin="25.0dip"
                 android:text="@string/lbl_photos"
-                android:textColor="@color/colorTextListItem"
+                android:textColor="#929292"
                 android:textSize="15.0dip" />
 
-            <android.support.v7.widget.RecyclerView
+             <android.support.v7.widget.RecyclerView
                 android:id="@+id/card_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="90.0dip"
                 android:orientation="horizontal"/>
-
-        </LinearLayout>
+            </LinearLayout>
     </android.support.v7.widget.CardView>
 </android.support.design.widget.CoordinatorLayout>

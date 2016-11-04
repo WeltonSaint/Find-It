@@ -48,4 +48,21 @@
     <string name="title_activity_sign_up">Cadastrar Usuário</string>
     <string name="itens_perdidos_encontrados">Itens Perdidos/Encontrados :</string>
     <string name="lbl_photos">Fotos:</string>
+
+    <string-array name="nav_item_activity_titles">
+        <item>Find-It</item>
+        <item>Meus Itens Perdidos</item>
+        <item>Meus Itens Encontrados</item>
+        <item>Meus Itens Devolvidos</item>
+        <item>Conversas</item>
+    </string-array>
+
+    <string-array name="list_item_descriptions">
+        <item>Itens Perdidos/Encontrados :</item>
+        <item>Itens Perdidos :</item>
+        <item>Itens Encontrados :</item>
+        <item>Itens Devolvidos :</item>
+    </string-array>
+
+    <string name="not_results">Nenhum Item</string>
 </resources>

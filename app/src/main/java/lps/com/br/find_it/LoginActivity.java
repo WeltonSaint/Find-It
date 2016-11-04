@@ -162,28 +162,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
-
-    public void validarDados(View view){
-        String login;
-        String senha;
-
-        AutoCompleteTextView mText = (AutoCompleteTextView)findViewById(R.id.email);
-        EditText pText = (EditText)findViewById(R.id.password);
-
-        login = mText.getText().toString();
-        senha = pText.getText().toString();
-
-        try{
-            senha = SHA1.SHA1(senha);
-        }catch(Exception e){
-            //send error notification
-        }
-
-        //sent request to bd;
-        //Toast.makeText(this, senha, Toast.LENGTH_SHORT).show();
-    }
-
-
     /**
      * Attempts to sign in or register the account specified by the login form.
      * If there are form errors (invalid email, missing fields, etc.), the
@@ -403,7 +381,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 boolean teste = false;
                 try
                 {
-                    System.out.println("login: " + mEmail + " <-> " + mPassword);
                     ConnectionDB conDB = ConnectionDB.getInstance();
                     PreparedStatement stmt = (PreparedStatement) conDB.getConnection().prepareStatement("select codigoCliente, nomeCliente from findit.Cliente where ucase(emailCliente) = ? and senhaCliente = ?");
                     stmt.setString(1, mEmail );

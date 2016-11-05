@@ -105,4 +105,6 @@ public class Item {
         this.status = status;
         this.codigoUsuario = codigoUsuario;
     }
+
+    public Item(){}
 }

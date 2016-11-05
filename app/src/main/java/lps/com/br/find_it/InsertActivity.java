@@ -15,6 +15,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.text.util.Linkify;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -221,6 +222,10 @@ public class InsertActivity extends AppCompatActivity implements OnMapReadyCallb
 
                 mInsertItemTask = new InsertActivity.InsertItem(item);
                 mInsertItemTask.execute((Void) null);
+
+                if(Match.match(item) == true){
+
+                }
 
             } catch (Exception e) {
                 //send error notification

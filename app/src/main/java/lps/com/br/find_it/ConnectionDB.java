@@ -10,27 +10,27 @@ import com.mysql.jdbc.Connection;
  * @version 1.2 - 21/02/16.
  *
  */
-public class ConnectionDB {
-	
-	private String url= "jdbc:mysql://db4free.net:3306/";
-	private String dbName = "findit";
-	private String driver = "com.mysql.jdbc.Driver";
-	private String userName = "lpspuc";
-	private String password = "laboratorio";
+class ConnectionDB {
+
 	private Connection conn;
 	private static ConnectionDB instance;
 	
 	private ConnectionDB(){
 		try {
-            Class.forName(driver).newInstance();
-            this.setConnection((Connection)DriverManager.getConnection(url+dbName,userName,password));
+			String driver = "com.mysql.jdbc.Driver";
+			Class.forName(driver).newInstance();
+			String url = "jdbc:mysql://db4free.net:3306/";
+			String dbName = "findit";
+			String userName = "lpspuc";
+			String password = "laboratorio";
+			this.setConnection((Connection)DriverManager.getConnection(url + dbName, userName, password));
         }
         catch (Exception sqle) {
             sqle.printStackTrace();
         }
 	}
 	
-	public static ConnectionDB getInstance(){
+	static ConnectionDB getInstance(){
 		
 		if(instance == null) {
 
@@ -41,11 +41,11 @@ public class ConnectionDB {
 	      return instance;
 	}
 
-	public Connection getConnection() {
+	Connection getConnection() {
 		return conn;
 	}
 
-	public void setConnection(Connection conn) {
+	private void setConnection(Connection conn) {
 		this.conn = conn;
 	}
 	

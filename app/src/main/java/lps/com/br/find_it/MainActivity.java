@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,8 +15,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-
-import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -35,8 +32,6 @@ public class MainActivity extends AppCompatActivity
     private static final String TAG_RETURNED_ITEM = "returned_item";
     public static String CURRENT_TAG = TAG_LOST_AND_FOUND_ITEM;
 
-    private TextView mNameUser;
-    private TextView mEmailUser;
     private NavigationView navigationView;
     private DrawerLayout drawer;
     private Handler mHandler;
@@ -108,16 +103,13 @@ public class MainActivity extends AppCompatActivity
         gallery.setAdapter(new ImageAdapter(this));*/
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        fab.setOnClickListener(view -> {
 
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this, InsertActivity.class);
-                intent.putExtra("code", mUserCode);
-                startActivity(intent);
+            Intent intent1 = new Intent();
+            intent1.setClass(MainActivity.this, InsertActivity.class);
+            intent1.putExtra("code", mUserCode);
+            startActivity(intent1);
 
-            }
         });
 
         // load toolbar titles from string resources
@@ -158,8 +150,8 @@ public class MainActivity extends AppCompatActivity
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
 
-        mEmailUser = (TextView) findViewById(R.id.emailUser);
-        mNameUser = (TextView) findViewById(R.id.nameUser);
+        TextView mEmailUser = (TextView) findViewById(R.id.emailUser);
+        TextView mNameUser = (TextView) findViewById(R.id.nameUser);
 
         mEmailUser.setText(mEmail.toLowerCase());
         mNameUser.setText(mUser);
@@ -204,22 +196,17 @@ public class MainActivity extends AppCompatActivity
         // when switching between navigation menus
         // So using runnable, the fragment is loaded with cross fade effect
         // This effect can be seen in GMail app
-        Runnable mPendingRunnable = new Runnable() {
-            @Override
-            public void run() {
-                // update the main content by replacing fragments
-                Fragment fragment = getHomeFragment();
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
-                        android.R.anim.fade_out);
-                fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG).commit();
-            }
+        Runnable mPendingRunnable = () -> {
+            // update the main content by replacing fragments
+            Fragment fragment = getHomeFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
+                    android.R.anim.fade_out);
+            fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG).commit();
         };
 
         // If mPendingRunnable is not null, then add to the message queue
-        if (mPendingRunnable != null) {
-            mHandler.post(mPendingRunnable);
-        }
+        mHandler.post(mPendingRunnable);
 
         //Closing drawer on item click
         drawer.closeDrawers();
@@ -237,8 +224,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private Fragment getHomeFragment() {
-        ListItem listItem = ListItem.newInstance(navItemIndex,mUserCode);
-        return listItem;
+        return ListItem.newInstance(navItemIndex,mUserCode);
     }
 
     @Override
@@ -257,8 +243,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.returned_item) {
             navItemIndex = 3;
             CURRENT_TAG = TAG_RETURNED_ITEM;
-        } else if (id == R.id.nav_share) {
-            //
         }
 
         //Checking if the item is in checked state or not, if not make it in checked state

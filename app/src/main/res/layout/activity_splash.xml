@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/colorPrimaryDark"
@@ -17,8 +18,9 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:background="@android:color/transparent"
-        android:contentDescription="Bem-Vindo ao Well Entity Search"
-        android:src="@drawable/logo_app" />
+        android:contentDescription="@string/welcome_to_app"
+        android:src="@drawable/logo_app"
+        tools:ignore="RtlHardcoded" />
 
     <TextView
         android:id="@+id/txtNomeApp"

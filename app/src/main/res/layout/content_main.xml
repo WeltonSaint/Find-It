@@ -12,25 +12,4 @@
     tools:context="lps.com.br.find_it.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/itens_perdidos_encontrados"
-            android:id="@+id/lblLostItem" />
-
-        <include
-            layout="@layout/list_item"
-            android:layout_marginTop="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
-
 </RelativeLayout>

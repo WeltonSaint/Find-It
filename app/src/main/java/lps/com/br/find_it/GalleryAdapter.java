@@ -1,7 +1,6 @@
 package lps.com.br.find_it;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,14 +10,18 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 /**
- * Created by PC.RW on 03/10/2016.
+ * Classe Adapter de Galeria
+ *
+ * @author PC.RW
+ * @version 1.0 - 03/10/2016.
+ *
  */
 
-public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHolder> {
+class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHolder> {
         private ArrayList<String> gallery;
         private Context context;
 
-        public GalleryAdapter(Context context, ArrayList<String> gallery) {
+        GalleryAdapter(Context context, ArrayList<String> gallery) {
             this.gallery = gallery;
             this.context = context;
         }
@@ -40,9 +43,9 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
             return gallery.size();
         }
 
-        public class ViewHolder extends RecyclerView.ViewHolder{
+        class ViewHolder extends RecyclerView.ViewHolder{
             private ImageView img;
-            public ViewHolder(View view) {
+            ViewHolder(View view) {
                 super(view);
                 img = (ImageView) view.findViewById(R.id.img);
             }

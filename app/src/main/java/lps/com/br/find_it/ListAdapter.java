@@ -5,7 +5,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 /**
- * Created by PC.RW on 11/09/2016.
+ * Classe Adapter de Listagem de Itens
+ *
+ * @author PC.RW
+ * @version 1.0 - 11/09/2016.
+ *
  */
 public class ListAdapter extends BaseAdapter {
 

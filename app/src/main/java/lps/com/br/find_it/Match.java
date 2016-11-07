@@ -1,38 +1,29 @@
 package lps.com.br.find_it;
 
+import android.annotation.SuppressLint;
 import android.location.Location;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-public class Match {
+class Match {
 
-    public static boolean match(Item item) throws InterruptedException, ExecutionException {
+    @SuppressLint("StaticFieldLeak")
+    static Item melhorResultado;
 
-        boolean resp = false;
-
-        Item melhorResultado = localizarPossivelItem(recuperarItens(item), item);
-
-        if(melhorResultado == null)
-            return false;
-
-        if(melhorResultado.getCodigoUsuario() != item.getCodigoUsuario() &&
-           Integer.parseInt(item.getStatus()) != 2 &&
-           !item.getStatus().equals(melhorResultado.getStatus())){
-            resp = true;
-        }
-        return resp;
+    static boolean match(Item item) throws InterruptedException, ExecutionException {
+        melhorResultado = localizarPossivelItem(recuperarItens(item), item);
+        return melhorResultado != null;
     }
 
-    public static ArrayList<Item> recuperarItens(Item item) throws InterruptedException, ExecutionException {
-        NoName task = new NoName(Integer.parseInt(item.getCategoria()), item.getNomeItem());
-        ArrayList<Item> list = task.execute((Void) null).get();
-        return list;
+    private static ArrayList<Item> recuperarItens(Item item) throws InterruptedException, ExecutionException {
+        NoName task = new NoName(item.getCategoria(), item.getNomeItem(), item.getStatus(), item.getCodigoUsuario());
+        return task.execute((Void) null).get();
     }
 
-    public static Item localizarPossivelItem(ArrayList<Item> list, Item item){
+    private static Item localizarPossivelItem(ArrayList<Item> list, Item item){
 
-        double menor_distancia = Integer.MAX_VALUE;
+        double menor_distancia = Double.MAX_VALUE;
         Item resp = null;
 
         Location loc1 = new Location("Item 1");
@@ -51,7 +42,6 @@ public class Match {
                 resp = x;
             }
         }
-
         return resp;
     }
 }

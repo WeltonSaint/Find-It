@@ -17,8 +17,7 @@
             android:layout_height="match_parent"
             android:clickable="true"
             android:background="?android:attr/selectableItemBackground"
-            android:layout_weight="1"
-            android:layout_margin="10dp">
+            android:layout_weight="1">
 
             <TextView
                 android:id="@+id/lbl_titulo"
@@ -46,7 +45,7 @@
                 android:layout_marginBottom="15.0dip"
                 android:layout_marginLeft="25.0dip"
                 android:layout_marginRight="25.0dip"
-                android:text="Categoria: "
+                android:text="@string/lbl_category"
                 android:textColor="@color/colorTextListItem"
                 android:textSize="15.0dip" />
 
@@ -57,7 +56,7 @@
                 android:layout_marginBottom="15.0dip"
                 android:layout_marginLeft="25.0dip"
                 android:layout_marginRight="25.0dip"
-                android:text="Status: "
+                android:text="@string/lbl_status"
                 android:textColor="@color/colorTextListItem"
                 android:textSize="15.0dip" />
 
@@ -67,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25.0dip"
                 android:layout_marginRight="25.0dip"
-                android:text="Descrição: "
+                android:text="@string/lbl_description"
                 android:textColor="@color/colorTextListItem"
                 android:textSize="15.0dip" />
 

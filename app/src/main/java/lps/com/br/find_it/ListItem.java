@@ -34,15 +34,10 @@ public class ListItem extends Fragment {
     private int mUserCode;
     private int mOption;
 
-    private String[] listItemDescriptions;
     private ListItemTask mAuthTask = null;
-    private ArrayList<Item> listItem;
 
-    private TextView lblItemDescription;
     private ProgressBar mListItemProgress;
     private RelativeLayout mListItemView;
-    private TextView lblNotResults;
-    private RecyclerView mListItems;
 
     public ListItem() {
         // Required empty public constructor
@@ -78,9 +73,8 @@ public class ListItem extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_list_item, container, false);
         // Inflate the layout for this fragment
-        return view;
+        return inflater.inflate(R.layout.fragment_list_item, container, false);
     }
 
 
@@ -88,12 +82,12 @@ public class ListItem extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         // save views as variables in this method
         // "view" is the one returned from onCreateView
-        listItemDescriptions = getResources().getStringArray(R.array.list_item_descriptions);
-        lblItemDescription = (TextView) view.findViewById(R.id.lbl_list_item_desc);
-        lblNotResults = (TextView) view.findViewById(R.id.lbl_not_results);
+        String[] listItemDescriptions = getResources().getStringArray(R.array.list_item_descriptions);
+        TextView lblItemDescription = (TextView) view.findViewById(R.id.lbl_list_item_desc);
+        TextView lblNotResults = (TextView) view.findViewById(R.id.lbl_not_results);
         mListItemProgress = (ProgressBar) view.findViewById(R.id.list_item_progress);
         mListItemView = (RelativeLayout) view.findViewById(R.id.list_item_view);
-        mListItems = (RecyclerView) view.findViewById(R.id.list_item);
+        RecyclerView mListItems = (RecyclerView) view.findViewById(R.id.list_item);
 
         try {
             LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -101,16 +95,14 @@ public class ListItem extends Fragment {
             lblItemDescription.setText(listItemDescriptions[mOption]);
             showProgress(true);
             mAuthTask = new ListItemTask(mOption, mUserCode);
-            listItem = mAuthTask.execute((Void) null).get();
+            ArrayList<Item> listItem = mAuthTask.execute((Void) null).get();
             if(listItem.size() == 0)
                 lblNotResults.setVisibility(View.VISIBLE);
             else
                 lblNotResults.setVisibility(View.GONE);
             ListItemAdapter adapter = new ListItemAdapter(getActivity(), listItem);
             mListItems.setAdapter(adapter);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
 

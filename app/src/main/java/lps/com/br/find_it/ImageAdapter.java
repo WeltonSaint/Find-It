@@ -9,7 +9,11 @@ import android.widget.Gallery;
 import android.widget.ImageView;
 
 /**
- * Created by PC.RW on 11/09/2016.
+ * Classe Adaptadora de Imagens
+ *
+ * @author PC.RW
+ * @version 1.0 - 11/09/2016.
+ *
  */
 public class ImageAdapter extends BaseAdapter {
     Integer[] imageIDs = {

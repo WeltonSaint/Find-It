@@ -1,32 +1,29 @@
 package lps.com.br.find_it;
 
+import android.annotation.SuppressLint;
 import android.location.Location;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-public class Match {
+class Match {
 
-    public static Item melhorResultado;
+    @SuppressLint("StaticFieldLeak")
+    static Item melhorResultado;
 
-    public static boolean match(Item item) throws InterruptedException, ExecutionException {
+    static boolean match(Item item) throws InterruptedException, ExecutionException {
         melhorResultado = localizarPossivelItem(recuperarItens(item), item);
-
-        if(melhorResultado == null)
-            return false;
-        else
-            return true;
+        return melhorResultado != null;
     }
 
-    public static ArrayList<Item> recuperarItens(Item item) throws InterruptedException, ExecutionException {
+    private static ArrayList<Item> recuperarItens(Item item) throws InterruptedException, ExecutionException {
         NoName task = new NoName(item.getCategoria(), item.getNomeItem(), item.getStatus(), item.getCodigoUsuario());
-        ArrayList<Item> list = task.execute((Void) null).get();
-        return list;
+        return task.execute((Void) null).get();
     }
 
-    public static Item localizarPossivelItem(ArrayList<Item> list, Item item){
+    private static Item localizarPossivelItem(ArrayList<Item> list, Item item){
 
-        double menor_distancia = Integer.MAX_VALUE;
+        double menor_distancia = Double.MAX_VALUE;
         Item resp = null;
 
         Location loc1 = new Location("Item 1");

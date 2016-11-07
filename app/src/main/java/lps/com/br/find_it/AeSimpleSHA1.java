@@ -1,14 +1,10 @@
 package lps.com.br.find_it;
 
-/**
- * Created by Paulo on 10/10/2016.
- */
-
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class AeSimpleSHA1 {
+class AeSimpleSHA1 {
     private static String convertToHex(byte[] data) {
         StringBuilder buf = new StringBuilder();
         for (byte b : data) {
@@ -22,7 +18,7 @@ public class AeSimpleSHA1 {
         return buf.toString();
     }
 
-    public static String SHA1(String text) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+    static String SHA1(String text) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         MessageDigest md = MessageDigest.getInstance("SHA-1");
         byte[] textBytes = text.getBytes("iso-8859-1");
         md.update(textBytes, 0, textBytes.length);

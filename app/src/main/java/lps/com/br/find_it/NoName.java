@@ -8,11 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- * Created by PC.RW on 04/11/2016.
- */
-
-public class NoName extends AsyncTask<Void, Void, ArrayList <Item>> {
+class NoName extends AsyncTask<Void, Void, ArrayList <Item>> {
 
     private final String mCategory;
     private final String mItemDescription;
@@ -27,7 +23,7 @@ public class NoName extends AsyncTask<Void, Void, ArrayList <Item>> {
     }
 
     @Override
-    protected ArrayList doInBackground(Void... params) {
+    protected ArrayList<Item> doInBackground(Void... params) {
         try {
             ArrayList<Item> listItems = new ArrayList<>();
             ConnectionDB conDB = ConnectionDB.getInstance();

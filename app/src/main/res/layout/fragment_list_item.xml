@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="ObsoleteLayoutParam,UselessParent">
 
         <TextView
             android:id="@+id/lbl_list_item_desc"
@@ -38,7 +39,7 @@
             <TextView
                 android:id="@+id/lbl_not_results"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="@string/not_results"
                 android:gravity="center"
                 android:visibility="gone"

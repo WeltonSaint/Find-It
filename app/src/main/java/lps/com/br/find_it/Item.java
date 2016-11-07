@@ -2,8 +2,17 @@ package lps.com.br.find_it;
 
 import android.widget.ImageView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
- * Created by Hanna on 29/10/2016.
+ * Classe Item
+ *
+ * @author Hanna
+ * @version 1.0 - 29/10/2016.
+ *
  */
 
 public class Item {
@@ -57,7 +66,18 @@ public class Item {
 
     public String getData() { return data;  }
 
-    public void setData(String data) { this.data = data; }
+    public void setData(String data) {
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        Date date;
+        try {
+            date = df.parse(data);
+            this.data = df.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            this.data = data;
+        }
+
+    }
 
     public String getCategoria() {
         return categoria;

@@ -9,7 +9,11 @@ import android.support.design.widget.Snackbar;
 import android.view.View;
 
 /**
- * Created by PC.RW on 14/10/2016.
+ * Classe de Manter Login
+ *
+ * @author PC.RW
+ * @version 1.0 - 14/10/2016.
+ *
  */
 
 public class KeepLogin {
@@ -27,7 +31,7 @@ public class KeepLogin {
     }
 
     public static void showIsNotConected(Activity activity){
-        Snackbar.make(activity.findViewById(android.R.id.content), "Sem Conexão com a Internet", Snackbar.LENGTH_LONG).show();
+        Snackbar.make(activity.findViewById(android.R.id.content), activity.getResources().getString(R.string.no_internet_connectivity), Snackbar.LENGTH_LONG).show();
     }
 
     public static boolean isPasswordSave(Context context){

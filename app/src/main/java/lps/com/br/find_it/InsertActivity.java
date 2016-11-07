@@ -1,19 +1,24 @@
 package lps.com.br.find_it;
 
 import android.Manifest;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.text.util.Linkify;
 import android.view.View;
@@ -35,6 +40,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.mysql.jdbc.PreparedStatement;
 
 import java.sql.SQLException;
+import java.util.concurrent.ExecutionException;
 
 public class InsertActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -49,7 +55,6 @@ public class InsertActivity extends AppCompatActivity implements OnMapReadyCallb
     private double lat;
     private double longit;
     private double distance;
-    private boolean hasMarker;
     private int strokeColor = 0x33b5e6;
     private int shadeColor = 0x4433b5e6;
     private int mUserCode;
@@ -106,7 +111,6 @@ public class InsertActivity extends AppCompatActivity implements OnMapReadyCallb
             googleMap.setMyLocationEnabled(true);
         }
         distance = 0;
-        hasMarker = false;
         googleMap.getUiSettings().setZoomControlsEnabled(true);
         googleMap.getUiSettings().setMyLocationButtonEnabled(true);
         googleMap.getUiSettings().setRotateGesturesEnabled(true);
@@ -123,12 +127,19 @@ public class InsertActivity extends AppCompatActivity implements OnMapReadyCallb
                     .zoom(17)
                     .build();                   // Creates a CameraPosition from the builder
             googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+            lat = location.getLatitude();
+            longit = location.getLongitude();
+            googleMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(location.getLatitude(), location.getLongitude()))
+                    .title("Marker")
+                    .draggable(true)
+                    .icon(BitmapDescriptorFactory
+                            .defaultMarker(174)));
         }
         googleMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             @Override
             public void onMapLongClick(LatLng latLng) {
                 googleMap.clear();
-                hasMarker = true;
                 lat = latLng.latitude;
                 longit = latLng.longitude;
 
@@ -145,7 +156,6 @@ public class InsertActivity extends AppCompatActivity implements OnMapReadyCallb
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-                if (hasMarker) {
                     googleMap.clear();
 
                     Location loc1 = new Location("");
@@ -166,7 +176,6 @@ public class InsertActivity extends AppCompatActivity implements OnMapReadyCallb
                             .draggable(true)
                             .icon(BitmapDescriptorFactory
                                     .defaultMarker(174)));
-                }
             }
         });
 
@@ -219,19 +228,57 @@ public class InsertActivity extends AppCompatActivity implements OnMapReadyCallb
             // perform the user login attempt.
             try {
                 Item item = new Item(nameItem, description, lat, longit, distance, category, situation, mUserCode);
-
+                if(Match.match(item)){
+                    showNotification(getUserContact(Match.melhorResultado.getCodigoUsuario()),nameItem);
+                }
                 mInsertItemTask = new InsertActivity.InsertItem(item);
                 mInsertItemTask.execute((Void) null);
-
-                if(Match.match(item) == true){
-
-                }
 
             } catch (Exception e) {
                 //send error notification
             }
 
         }
+    }
+
+    private void showNotification(String contactUser, String itemName){
+        if (whatsappInstalledOrNot("com.whatsapp")) {
+            Intent sendIntent = new Intent("android.intent.action.MAIN");
+            sendIntent.setComponent(new ComponentName("com.whatsapp","com.whatsapp.Conversation"));
+            sendIntent.putExtra("jid", PhoneNumberUtils.stripSeparators(contactUser)+"@s.whatsapp.net");
+            new MyNotificationManager(this, "Match de Item", "O seu item \""+itemName+"\" teve um match, clique aqui para conversar com quem o encontrou", sendIntent);
+        } else {
+            Toast.makeText(this, "WhatsApp not Installed",
+                    Toast.LENGTH_SHORT).show();
+            Uri uri = Uri.parse("market://details?id=com.whatsapp");
+            Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(goToMarket);
+        }
+    }
+
+    private String getUserContact(int mUserCode){
+        NoName2 task = new NoName2(mUserCode);
+        try {
+            return task.execute((Void) null).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return null;
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private boolean whatsappInstalledOrNot(String uri) {
+        PackageManager pm = getPackageManager();
+        boolean app_installed = false;
+        try {
+            pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
+            app_installed = true;
+        } catch (PackageManager.NameNotFoundException e) {
+            app_installed = false;
+        }
+        return app_installed;
     }
 
     /**

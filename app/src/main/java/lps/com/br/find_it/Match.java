@@ -7,25 +7,19 @@ import java.util.concurrent.ExecutionException;
 
 public class Match {
 
+    public static Item melhorResultado;
+
     public static boolean match(Item item) throws InterruptedException, ExecutionException {
-
-        boolean resp = false;
-
-        Item melhorResultado = localizarPossivelItem(recuperarItens(item), item);
+        melhorResultado = localizarPossivelItem(recuperarItens(item), item);
 
         if(melhorResultado == null)
             return false;
-
-        if(melhorResultado.getCodigoUsuario() != item.getCodigoUsuario() &&
-           Integer.parseInt(item.getStatus()) != 2 &&
-           !item.getStatus().equals(melhorResultado.getStatus())){
-            resp = true;
-        }
-        return resp;
+        else
+            return true;
     }
 
     public static ArrayList<Item> recuperarItens(Item item) throws InterruptedException, ExecutionException {
-        NoName task = new NoName(Integer.parseInt(item.getCategoria()), item.getNomeItem());
+        NoName task = new NoName(item.getCategoria(), item.getNomeItem(), item.getStatus(), item.getCodigoUsuario());
         ArrayList<Item> list = task.execute((Void) null).get();
         return list;
     }
@@ -51,7 +45,6 @@ public class Match {
                 resp = x;
             }
         }
-
         return resp;
     }
 }

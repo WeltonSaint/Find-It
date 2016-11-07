@@ -2,7 +2,7 @@
 <menu
   xmlns:android="http://schemas.android.com/apk/res/android">
         <group android:checkableBehavior="single">
-            <item android:icon="@drawable/ic_menu_manage" android:id="@+id/lost_and_found_item" android:title="Meus Itens Encontrados/Perdidos" />
+            <item android:icon="@drawable/ic_menu_manage" android:id="@+id/lost_and_found_item" android:title="Todos os Itens" />
             <item android:icon="@drawable/ic_menu_camera" android:id="@+id/lost_item" android:title="Meus Itens Perdidos" />
             <item android:icon="@drawable/ic_menu_gallery" android:id="@+id/found_item" android:title="Meus Itens Encontrados" />
             <item android:icon="@drawable/ic_menu_slideshow" android:id="@+id/returned_item" android:title="Meus Itens Devolvidos" />

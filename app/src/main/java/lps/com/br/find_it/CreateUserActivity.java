@@ -275,7 +275,7 @@ public class CreateUserActivity extends AppCompatActivity {
 
             if (success) {
 
-                dlg.setMessage("Usuário Cadastrado com Sucesso!");
+                dlg.setMessage(getString(R.string.success_create_user));
                 dlg.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -284,7 +284,7 @@ public class CreateUserActivity extends AppCompatActivity {
                 });
 
             } else {
-                dlg.setMessage("Não foi Possível Cadastrar o Usuário! Tente novamente...");
+                dlg.setMessage(getString(R.string.notsuccess_create_user));
                 dlg.setNeutralButton("Ok", null);
             }
             dlg.show();

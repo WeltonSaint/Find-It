@@ -48,6 +48,8 @@
     <string name="title_activity_sign_up">Cadastrar Usuário</string>
     <string name="itens_perdidos_encontrados">Itens Perdidos/Encontrados :</string>
     <string name="lbl_photos">Fotos:</string>
+    <string name="success_create_user">"Usuário Cadastrado com Sucesso!"</string>
+    <string name="notsuccess_create_user">"Não foi Possível Cadastrar o Usuário! Tente novamente..."</string>
 
     <string-array name="nav_item_activity_titles">
         <item>Find-It</item>

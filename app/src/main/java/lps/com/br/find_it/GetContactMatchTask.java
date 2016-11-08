@@ -7,11 +7,11 @@ import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-class NoName2 extends AsyncTask<Void, Void, String> {
+class GetContactMatchTask extends AsyncTask<Void, Void, String> {
 
     private final int mUserCode;
 
-    NoName2(int userCode){
+    GetContactMatchTask(int userCode){
         mUserCode = userCode;
     }
 

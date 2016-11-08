@@ -17,13 +17,13 @@ class Match {
     }
 
     private static ArrayList<Item> recuperarItens(Item item) throws InterruptedException, ExecutionException {
-        NoName task = new NoName(item.getCategoria(), item.getNomeItem(), item.getStatus(), item.getCodigoUsuario());
+        PossibleMatchListItem task = new PossibleMatchListItem(item.getCategoria(), item.getNomeItem(), item.getStatus(), item.getCodigoUsuario());
         return task.execute((Void) null).get();
     }
 
     private static Item localizarPossivelItem(ArrayList<Item> list, Item item){
 
-        double menor_distancia = Double.MAX_VALUE;
+        double menor_distancia = item.getRaio();
         Item resp = null;
 
         Location loc1 = new Location("Item 1");
@@ -37,7 +37,7 @@ class Match {
 
             double distancia = loc1.distanceTo(loc2) ;
 
-            if(distancia < menor_distancia){
+            if(distancia <= menor_distancia){
                 menor_distancia = distancia;
                 resp = x;
             }

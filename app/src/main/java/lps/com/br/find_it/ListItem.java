@@ -2,6 +2,7 @@ package lps.com.br.find_it;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -13,8 +14,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.mysql.jdbc.PreparedStatement;
@@ -33,6 +36,7 @@ public class ListItem extends Fragment {
     // TODO: Rename and change types of parameters
     private int mUserCode;
     private int mOption;
+    private ArrayList<Item> listItem;
 
     private ListItemTask mAuthTask = null;
 
@@ -95,17 +99,79 @@ public class ListItem extends Fragment {
             lblItemDescription.setText(listItemDescriptions[mOption]);
             showProgress(true);
             mAuthTask = new ListItemTask(mOption, mUserCode);
-            ArrayList<Item> listItem = mAuthTask.execute((Void) null).get();
+            listItem = mAuthTask.execute((Void) null).get();
             if(listItem.size() == 0)
                 lblNotResults.setVisibility(View.VISIBLE);
             else
                 lblNotResults.setVisibility(View.GONE);
             ListItemAdapter adapter = new ListItemAdapter(getActivity(), listItem);
+
+            mListItems.addOnItemTouchListener(
+                    new RecyclerItemClickListener(this.getContext(), mListItems ,new RecyclerItemClickListener.OnItemClickListener() {
+                        @Override public void onItemClick(View view, int position) {
+                            if(!listItem.get(position).getStatus().equals("Devolvido"))
+                                showDialogAlterStatusItem(position);
+                        }
+
+                        @Override public void onLongItemClick(View view, int position) {
+                            if(!listItem.get(position).getStatus().equals("Devolvido"))
+                                showDialogAlterStatusItem(position);
+                        }
+                    })
+            );
+
             mListItems.setAdapter(adapter);
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
 
+    }
+
+    private void showDialogAlterStatusItem(int position){
+        LayoutInflater layoutInflaterAndroid = LayoutInflater.from(ListItem.this.getContext());
+        @SuppressLint("InflateParams") View mView = layoutInflaterAndroid.inflate(R.layout.user_input_dialog_box, null);
+        AlertDialog.Builder alertDialogBuilderUserInput = new AlertDialog.Builder(ListItem.this.getContext());
+        alertDialogBuilderUserInput.setView(mView);
+
+        final Spinner mAlterStatusItem = (Spinner) mView.findViewById(R.id.spin_alter_status);
+        String [] options = {listItem.get(position).getStatus(), "Devolvido"};
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(ListItem.this.getContext(), android.R.layout.simple_spinner_item, options);
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mAlterStatusItem.setAdapter(spinnerArrayAdapter);
+        alertDialogBuilderUserInput
+                .setCancelable(false)
+                .setPositiveButton(getString(R.string.lbl_alter), (dialogBox, id) -> {
+                    String status = mAlterStatusItem.getSelectedItem().toString();
+                    if(status.equals("Devolvido")){
+                        try {
+                        UpdateStatusItemTask task = new UpdateStatusItemTask(listItem.get(position).getCodigo());
+                        boolean success = false;
+
+                            success = task.execute((Void) null).get();
+                            AlertDialog.Builder dlg = new AlertDialog.Builder(ListItem.this.getContext());
+
+                            if (success) {
+                                dlg.setMessage(ListItem.this.getResources().getString(R.string.alter_status_item_success));
+                            } else {
+                                dlg.setMessage(ListItem.this.getResources().getString(R.string.alter_status_item_error));
+                            }
+                            dlg.setNeutralButton("Ok", (dialog, which) -> dialogBox.cancel());
+                            dlg.show();
+
+                        } catch (InterruptedException | ExecutionException e) {
+                            e.printStackTrace();
+                        }
+
+                    } else {
+                        dialogBox.cancel();
+                    }
+                })
+
+                .setNegativeButton(getString(R.string.lbl_cancel),
+                        (dialogBox, id) -> dialogBox.cancel());
+
+        AlertDialog alertDialogAndroid = alertDialogBuilderUserInput.create();
+        alertDialogAndroid.show();
     }
 
 
@@ -160,7 +226,7 @@ public class ListItem extends Fragment {
 
         private final int mOption;
         private int mUserCode;
-        private String[] complementQuery = {"nomeStatus <> 'Devolvido'", "nomeStatus = 'Perdido'", "nomeStatus = 'Encontrado'", "nomeStatus = 'Devolvido'"};
+        private String[] complementQuery = {"nomeStatus <> ''", "nomeStatus = 'Perdido'", "nomeStatus = 'Encontrado'", "nomeStatus = 'Devolvido'"};
 
 
         ListItemTask(int option, int userCode) {
@@ -174,7 +240,7 @@ public class ListItem extends Fragment {
             try {
                 ArrayList<Item> listItems = new ArrayList<>();
                 ConnectionDB conDB = ConnectionDB.getInstance();
-                PreparedStatement stmt = (PreparedStatement) conDB.getConnection().prepareStatement("select nomeItem, dataCadastro, descricaoItem, latitudeItem, longitudeItem, raioItem, nomeCategoria, nomeStatus from findit.Item natural join findit.Categoria natural join findit.Status where codigoCliente = ? and " + complementQuery[mOption]);
+                PreparedStatement stmt = (PreparedStatement) conDB.getConnection().prepareStatement("select codigoItem, nomeItem, TIMESTAMP(DATE_ADD(dataCadastro, INTERVAL -3 HOUR)) as dataCadastro, descricaoItem, latitudeItem, longitudeItem, raioItem, nomeCategoria, nomeStatus from findit.Item natural join findit.Categoria natural join findit.Status where codigoCliente = ? and " + complementQuery[mOption] + " order by dataCadastro DESC");
                 stmt.setInt(1, mUserCode);
 
                 ResultSet rs = stmt.executeQuery();
@@ -183,6 +249,7 @@ public class ListItem extends Fragment {
 
                 while (rs.next()) {
                     item = new Item(rs.getString("nomeItem"), rs.getString("descricaoItem"), rs.getDouble("latitudeItem"), rs.getDouble("longitudeItem"), rs.getDouble("raioItem"), rs.getString("nomeCategoria"), rs.getString("nomeStatus"), mUserCode);
+                    item.setCodigo(rs.getInt("codigoItem"));
                     item.setData(rs.getString("dataCadastro"));
                     listItems.add(item);
                 }

@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId "lps.com.br.find_it"
         minSdkVersion 14
-        targetSdkVersion 24
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
     }
@@ -21,9 +21,6 @@ android {
         jackOptions {
             enabled true
         }
-    }
-    dexOptions {
-        incremental true
     }
 
     compileOptions {

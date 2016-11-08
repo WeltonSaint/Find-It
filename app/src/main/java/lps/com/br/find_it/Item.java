@@ -17,6 +17,7 @@ import java.util.Date;
 
 public class Item {
 
+    private int codigo;
     private String nomeItem;
     private ImageView foto;
     private String descricao;
@@ -27,6 +28,14 @@ public class Item {
     private String categoria;
     private String status;
     private int codigoUsuario;
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
 
     public String getNomeItem() {
         return nomeItem;
@@ -67,11 +76,9 @@ public class Item {
     public String getData() { return data;  }
 
     public void setData(String data) {
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        Date date;
         try {
-            date = df.parse(data);
-            this.data = df.format(date);
+            Date date = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss.S").parse(data);
+            this.data = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(date);
         } catch (ParseException e) {
             e.printStackTrace();
             this.data = data;

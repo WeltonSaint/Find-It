@@ -3,17 +3,9 @@ package lps.com.br.find_it;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Activity;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -22,7 +14,6 @@ import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.mysql.jdbc.PreparedStatement;
 
@@ -30,7 +21,6 @@ import java.sql.SQLException;
 
 public class CreateUserActivity extends AppCompatActivity {
 
-    public AeSimpleSHA1 SHA1 = new AeSimpleSHA1();
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -57,19 +47,16 @@ public class CreateUserActivity extends AppCompatActivity {
         mRepeatPasswordView = (EditText) findViewById(R.id.repeat_password_sign_up);
 
         Button mEmailSignInButton = (Button) findViewById(R.id.sign_up_button);
-        mEmailSignInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(KeepLogin.isConnected(CreateUserActivity.this))
-                    attemptSignUp();
-                else
-                    KeepLogin.showIsNotConected(CreateUserActivity.this);
-            }
+        mEmailSignInButton.setOnClickListener(view -> {
+            if(KeepLogin.isConnected(CreateUserActivity.this))
+                attemptSignUp();
+            else
+                KeepLogin.showIsNotConected(CreateUserActivity.this);
         });
 
         mCreateUserFormView = findViewById(R.id.create_user_form);
         mProgressView = findViewById(R.id.create_user_progress);
-        new MyNotificationManager(this, "Titulo", "Meu texto aqui");
+        //new MyNotificationManager(this, "Titulo", "Meu texto aqui");
     }
 
     /**
@@ -160,7 +147,7 @@ public class CreateUserActivity extends AppCompatActivity {
             try {
 
                 showProgress(true);
-                mAuthTask = new CreateUserTask(userName, contact, email.toUpperCase(), SHA1.SHA1(password));
+                mAuthTask = new CreateUserTask(userName, contact, email.toUpperCase(), AeSimpleSHA1.SHA1(password));
                 mAuthTask.execute((Void) null);
 
             } catch (Exception e) {
@@ -275,16 +262,11 @@ public class CreateUserActivity extends AppCompatActivity {
 
             if (success) {
 
-                dlg.setMessage(getString(R.string.success_create_user));
-                dlg.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        CreateUserActivity.this.finish();
-                    }
-                });
+                dlg.setMessage(CreateUserActivity.this.getResources().getString(R.string.create_user_success));
+                dlg.setNeutralButton("Ok", (dialog, which) -> CreateUserActivity.this.finish());
 
             } else {
-                dlg.setMessage(getString(R.string.notsuccess_create_user));
+                dlg.setMessage(CreateUserActivity.this.getResources().getString(R.string.create_user_success));
                 dlg.setNeutralButton("Ok", null);
             }
             dlg.show();

@@ -44,12 +44,11 @@
     <string name="prompt_position">Local</string>
     <string name="prompt_data">Data</string>
     <string name="help_logo">Logotipo da Aplicação</string>
+    <string name="welcome_to_app">Bem-Vindo ao Find-It</string>
     <string name="title_activity_insert">Inserir</string>
     <string name="title_activity_sign_up">Cadastrar Usuário</string>
-    <string name="lbl_photos">Fotos:</string>
-    <string name="success_create_user">"Usuário Cadastrado com Sucesso!"</string>
-    <string name="notsuccess_create_user">"Não foi Possível Cadastrar o Usuário! Tente novamente..."</string>
 
+    <string name="all_items">Todos os Itens</string>
     <string name="lost_item">Meus Itens Perdidos</string>
     <string name="found_item">Meus Itens Encontrados</string>
     <string name="returned_item">Meus Itens Devolvidos</string>
@@ -62,14 +61,13 @@
     </string-array>
 
     <string-array name="list_item_descriptions">
-        <item>Itens Perdidos/Encontrados :</item>
+        <item>Todos os Itens :</item>
         <item>Itens Perdidos :</item>
         <item>Itens Encontrados :</item>
         <item>Itens Devolvidos :</item>
     </string-array>
 
     <string name="not_results">Nenhum Item</string>
-    <string name="all_items">Todos os Itens</string>
 
     <string name="error_whatsapp_not_installed">WhatsApp não Instalado</string>
     <string name="title_notification">Match de Item</string>
@@ -88,11 +86,17 @@
     <string name="no_internet_connectivity">Sem Conexão com a Internet</string>
 
     <string name="create_user_success">Usuário Cadastrado com Sucesso!</string>
-    <string name="create_user_error">Não foi Possível Cadastrar o Usuário! Tente novamente...</string>]
+    <string name="create_user_error">Não foi Possível Cadastrar o Usuário! Tente novamente...</string>
+
+    <string name="lbl_alter">Alterar</string>
+    <string name="lbl_cancel">Cancelar</string>
+
+    <string name="alter_status_item_success">Status Alterado com Sucesso!</string>
+    <string name="alter_status_item_error">Não foi possível Alterar o Status do Item! Tente novamente...</string>
 
     <string name="lbl_category">Categoria :\u0020</string>
     <string name="lbl_status">Status :\u0020</string>
     <string name="lbl_description">Descrição :\u0020</string>
-    <string name="welcome_to_app">Bem-Vindo ao Well Entity Search</string>
+    <string name="lbl_photos">Fotos:</string>
 
 </resources>

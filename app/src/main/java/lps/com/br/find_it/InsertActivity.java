@@ -108,11 +108,13 @@ public class InsertActivity extends AppCompatActivity implements OnMapReadyCallb
 
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
+        //Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
         String locationProvider = LocationManager.NETWORK_PROVIDER;
         Location location = locationManager.getLastKnownLocation(locationProvider);
         if (location != null)
         {
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 13));
+
             CameraPosition cameraPosition = new CameraPosition.Builder()
                     .target(new LatLng(location.getLatitude(), location.getLongitude()))      // Sets the center of the map to location user
                     .zoom(17)
@@ -242,7 +244,7 @@ public class InsertActivity extends AppCompatActivity implements OnMapReadyCallb
     }
 
     private String getUserContact(int mUserCode){
-        GetContactMatchTask task = new GetContactMatchTask(mUserCode);
+        NoName2 task = new NoName2(mUserCode);
         try {
             return task.execute((Void) null).get();
         } catch (InterruptedException e) {
